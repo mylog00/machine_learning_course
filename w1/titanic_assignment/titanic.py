@@ -1,5 +1,6 @@
 import pandas
 import math
+import pearson
 
 # load data from csv
 # PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked
@@ -68,6 +69,8 @@ print(median_age)
 
 # 5. Коррелируют ли число братьев/сестер с числом родителей/детей?
 # Посчитайте корреляцию Пирсона между признаками SibSp и Parch.
+pearson_coef = pearson.pearson_coef(data['SibSp'], data['Parch'])
+print(pearson_coef)
 
 # 6. Какое самое популярное женское имя на корабле? Извлеките из
 # полного имени пассажира (колонка Name) его личное имя (First Name).
