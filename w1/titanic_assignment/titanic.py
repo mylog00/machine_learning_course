@@ -1,5 +1,6 @@
 import pandas
 import math
+import re
 import pearson
 
 # load data from csv
@@ -80,3 +81,19 @@ print(pearson_coef)
 # Попробуйте вручную разобрать несколько значений столбца Name
 # и выработать правило для извлечения имен, а также разделения
 # их на женские и мужские.
+
+maxFreqName = ''
+maxFreq = 0
+names = {}
+for fullName, sex in zip(data['Name'], data['Sex']):
+    if sex == 'female':
+        # ['Johnston,', 'Miss.', 'Catherine', 'Helen', '"Carrie"']
+        name = fullName.split(' ')[2]
+        name = re.sub('[\(\)]', '', name)
+        counter = names.get(name, 0)
+        counter += 1
+        names[name] = counter
+        if counter > maxFreq:
+            maxFreq = counter
+            maxFreqName = name
+print(maxFreqName, maxFreq)
